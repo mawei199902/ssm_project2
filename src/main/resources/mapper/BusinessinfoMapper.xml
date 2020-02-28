@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qianfeng.dao.BusinessinfoDao">
+
+    <!--##开辟该账户的商家信息-->
+    <insert id="insertBusinessInfo"  parameterType="int">
+        INSERT into businessinfo (business_id) VALUES (#{business_id});
+    </insert>
+
+    <update id ="updateBusinessInfo"  parameterType="com.qianfeng.pojo.Businessinfo">
+        UPDATE businessinfo set business_info_legal_person = #{business_info_legal_person},
+        business_info_legal_person_tel = #{business_info_legal_person_tel},business_info_name=#{business_info_name}
+         WHERE business_id = #{business_id};
+    </update>
+
+
+</mapper>

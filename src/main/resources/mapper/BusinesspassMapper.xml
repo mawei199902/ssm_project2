@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qianfeng.dao.BusinesspassDao">
+
+    <!--##检查用户名对应密码是否正确-->
+    <select id="selectBusinessPass" parameterType="com.qianfeng.pojo.Businesspass" resultType="com.qianfeng.pojo.Businesspass">
+        SELECT * FROM businesspass where business_pass_word = #{business_pass_word} and business_id = #{business_id};
+    </select>
+
+    <!--##创建对应用户的密码-->
+    <insert id="insertBusinessPass" parameterType="com.qianfeng.pojo.Businesspass">
+        INSERT into businesspass (business_pass_word,business_id) VALUES (#{business_pass_word},#{business_id});
+    </insert>
+
+    <!--##修改登录信息
+UPDATE businesspass set business_pass_word = "234" where business_id = 1;-->
+    <update id="updatePassWord"  parameterType="com.qianfeng.pojo.Businesspass">
+        UPDATE businesspass set business_pass_word = #{business_pass_word} where business_id = #{business_id};
+    </update>
+
+
+</mapper>

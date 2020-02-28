@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qianfeng.dao.SystemUserDao">
+
+    <select id="selectSystemUserAllInfo" resultType="com.qianfeng.pojo.SystemUserAndUsername">
+        select s.user_id,s.user_true_name,s.user_tel,s.user_sex,l.login_user_name
+        from systemuser s,loginuser l
+        where s.login_user_id = l.login_user_id
+    </select>
+
+    <select id="selectSystemUserByID" parameterType="int" resultType="com.qianfeng.pojo.SystemUserAndUsername">
+        select s.login_user_id,s.user_true_name,s.user_tel,s.user_sex,l.login_user_name,p.login_pass_word
+        from systemuser s,loginuser l,loginpass p
+        where s.login_user_id = l.login_user_id
+            and l.login_user_id = p.login_user_id
+            AND s.login_user_id = #{login_user_id};
+    </select>
+
+
+    <select id="selectBusinessUserAllInfo" resultType="com.qianfeng.pojo.BusinessUserAndUsername">
+           select s.business_id,s.business_username,i.business_info_legal_person,
+i.business_info_legal_person_tel,i.business_info_name,p.business_pass_id
+        from business s,businessinfo i,businesspass p
+        where s.business_id = i.business_id
+        AND   i.business_id = p.business_id
+    </select>
+
+    <select id="selectBusinessUserByID" parameterType="int" resultType="com.qianfeng.pojo.BusinessUserAndUsername">
+           select s.business_id,s.business_username,i.business_info_legal_person,
+i.business_info_legal_person_tel,i.business_info_name
+        from business s,businessinfo i
+        where s.business_id = i.business_id
+        AND   s.business_id = #{business_id};
+    </select>
+
+    <!--    ###修改基本信息
+    UPDATE systemuser set user_true_name = "小明",user_tel="12345678901", user_sex = "男"
+    where login_user_id = 1;-->
+<update id="updateAllData" parameterType="com.qianfeng.pojo.SystemUser">
+    UPDATE systemuser set user_true_name = #{user_true_name},user_tel=#{user_tel}, user_sex = #{user_sex}
+    where login_user_id = #{login_user_id};
+</update>
+
+
+
+</mapper>

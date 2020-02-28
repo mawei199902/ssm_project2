@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qianfeng.dao.BusinessDao">
+
+    <!--##查询指定用户对应id-->
+    <!--##检查当前用户表中是否存在-->
+    <select id="selectByUsername" parameterType="string" resultType="com.qianfeng.pojo.Business">
+        SELECT * from business where business_username = #{business_username};
+    </select>
+
+    <!--##创建用户名-->
+    <insert id="insertBusiness"  parameterType="string">
+        INSERT into business (business_username) VALUES (#{business_username});
+    </insert>
+
+    <!--修改店铺名-->
+
+    <update id="updateBusinessName"   parameterType="com.qianfeng.pojo.Business">
+     UPDATE business set business_username = #{bussiness_name} where business_id = #{bussiness_id};
+    </update>
+
+</mapper>
